@@ -17,6 +17,11 @@ export interface gameResult {
   gameTurns?: any[];
 }
 
+export interface currentGame {
+  start: string;
+  players: string[];
+}
+
 const game1: gameResult = {
   start: "2022-02-14T18:55:00"
   , end: "2022-02-14T19:00:00"
@@ -50,4 +55,22 @@ export class GameService {
     ];
   };
 
+  getUniquePlayers = () => (
+    [...new Set(this.gameResults.flatMap(x => x.players.map(y => y.name)))]
+  );
+
+  currentGame: currentGame = {
+    start: ""
+    , players: []
+  };
+
+  setCurrentGame = (g: currentGame) => {
+    this.currentGame = g;
+  };
+
+  calculateShortestGame = () => (
+    Math.min(
+        ...this.gameResults.map(x => Date.parse(x.end) - Date.parse(x.start))
+    )
+);
 }

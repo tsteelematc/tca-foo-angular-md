@@ -21,10 +21,13 @@ export class PlayGameComponent implements OnInit {
 
     // Add a new game result to the service.
     this.gameSvc.addGameResult({
-      start: ""
-      , end: ""
-      , players: []
-      , winner: ""
+      start: this.gameSvc.currentGame.start
+      , end: new Date().toISOString()
+      , players: this.gameSvc.currentGame.players.map(x => ({
+        name: x 
+        , order: 0
+      }))
+      , winner: "Suzzie"
     });
 
     // Navigate back to the Home component.

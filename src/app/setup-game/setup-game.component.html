@@ -1,10 +1,20 @@
 <h2>
     Setup Game
 </h2>
+
+<h3>
+    Choose Players
+</h3>
+
+<p
+    *ngFor="let p of availablePlayers"
+>
+    {{ p.name }} ({{ p.checked.toString() }})
+</p>
 <button 
     mat-raised-button 
     color="primary"
-    routerLink="/play"
+    (click)="startGame()"
 >
     Start Playing
 </button>
