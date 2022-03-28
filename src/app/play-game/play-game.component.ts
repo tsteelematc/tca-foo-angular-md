@@ -10,7 +10,7 @@ import { gameResult, GameService } from '../game.service';
 export class PlayGameComponent implements OnInit {
 
   constructor(
-    private gameSvc: GameService
+    public gameSvc: GameService
     , private routerSvc: Router
   ) { }
 

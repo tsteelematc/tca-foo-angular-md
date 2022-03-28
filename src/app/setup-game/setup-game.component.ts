@@ -32,15 +32,24 @@ export class SetupGameComponent implements OnInit {
     // Save players and start timestamp in service.
     this.gameSvc.setCurrentGame({
       start: new Date().toISOString()
-      , players: [
-        this.availablePlayers[0].name
-        , this.availablePlayers[1].name
-        , "Suzzie"
-      ]
+      , players: this.availablePlayers.filter(x => x.checked).map(x => x.name)
     });
 
     // Navigate to play screen.
     this.routerSvc.navigateByUrl("/play");
   };
 
+  newPlayerName = "";
+
+  addNewPlayer = () => {
+    this.availablePlayers = [
+      ...this.availablePlayers
+      , {
+        name: this.newPlayerName
+        , checked: true
+      }
+    ];
+
+    this.newPlayerName = "";
+  };
 }

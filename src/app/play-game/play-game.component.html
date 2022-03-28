@@ -1,6 +1,11 @@
 <h2>
     Play Game
 </h2>
+<p
+    *ngFor="let p of gameSvc.currentGame.players"
+>
+    {{ p }}
+</p>
 <button 
     mat-raised-button 
     color="primary"

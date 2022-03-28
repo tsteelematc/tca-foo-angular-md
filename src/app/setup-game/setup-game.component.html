@@ -5,12 +5,30 @@
 <h3>
     Choose Players
 </h3>
-
-<p
+<mat-form-field appearance="fill">
+    <mat-label>
+        Enter player name
+    </mat-label>
+    <input 
+        matInput
+        [(ngModel)]="newPlayerName"
+    >
+</mat-form-field>
+<button
+    mat-raised-button
+    (click)="addNewPlayer()"
+>
+    Add
+</button>
+<div
     *ngFor="let p of availablePlayers"
 >
-    {{ p.name }} ({{ p.checked.toString() }})
-</p>
+    <mat-checkbox
+        [(ngModel)]="p.checked"
+    >
+        {{ p.name }}
+    </mat-checkbox>
+</div>
 <button 
     mat-raised-button 
     color="primary"
