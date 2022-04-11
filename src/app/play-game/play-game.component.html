@@ -1,15 +1,18 @@
 <h2>
     Play Game
 </h2>
-<p
+<button
     *ngFor="let p of gameSvc.currentGame.players"
->
-    {{ p }}
-</p>
-<button 
     mat-raised-button 
     color="primary"
-    (click)="endGame()"
+    (click)="wonGame(p)"
 >
-    Done
+    {{ p }} Won
+</button>
+<button 
+    mat-raised-button 
+    color="light"
+    (click)="quitGame()"
+>
+    Quit
 </button>

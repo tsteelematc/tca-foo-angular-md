@@ -17,7 +17,7 @@ export class PlayGameComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  endGame = () => {
+  wonGame = (winningPlayer: string) => {
 
     // Add a new game result to the service.
     this.gameSvc.addGameResult({
@@ -27,11 +27,14 @@ export class PlayGameComponent implements OnInit {
         name: x 
         , order: 0
       }))
-      , winner: "Suzzie"
+      , winner: winningPlayer
     });
 
     // Navigate back to the Home component.
     this.routerSvc.navigateByUrl("/");
   };
 
+  quitGame = () => {
+    this.routerSvc.navigateByUrl("/");
+  };
 }
