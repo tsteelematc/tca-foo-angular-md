@@ -87,6 +87,6 @@ export class GameService {
         , losses: gamesThisPlayerHasPlayed.length - gamesThisPlayerHasWon.length
         , winningPercentage: (gamesThisPlayerHasWon.length / gamesThisPlayerHasPlayed.length).toFixed(3)
       };
-    });
+    }).sort((a, b) => a.winningPercentage > b.winningPercentage ? -1 : 1);
   }
 }
