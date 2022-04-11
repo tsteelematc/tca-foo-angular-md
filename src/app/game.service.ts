@@ -72,5 +72,21 @@ export class GameService {
     Math.min(
         ...this.gameResults.map(x => Date.parse(x.end) - Date.parse(x.start))
     )
-);
+  );
+
+  calculateLeaderBoard = () => {
+
+    return this.getUniquePlayers().map(x => {
+  
+      const gamesThisPlayerHasPlayed = this.gameResults.filter(y => y.players.some(z => z.name === x));
+      const gamesThisPlayerHasWon = gamesThisPlayerHasPlayed.filter(y => y.winner === x);
+  
+      return {
+        name: x
+        , wins: gamesThisPlayerHasWon.length
+        , losses: gamesThisPlayerHasPlayed.length - gamesThisPlayerHasWon.length
+        , winningPercentage: (gamesThisPlayerHasWon.length / gamesThisPlayerHasPlayed.length).toFixed(3)
+      };
+    });
+  }
 }
