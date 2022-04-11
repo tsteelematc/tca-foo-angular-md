@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
     this.gamesPlayed = this.gameSvc.gameResults.length;
 
     this.shortestGameDuration = this.gameSvc.calculateShortestGame() / 1000 / 60;
+
+    this.leaderboardData = this.gameSvc.calculateLeaderBoard();
   }
 
 
@@ -22,4 +24,6 @@ export class HomeComponent implements OnInit {
 
   shortestGameDuration = 0;
 
+  leaderboardData: any[] = [];
+  leaderboardColumns = ["wins", "losses", "winningPercent", "name"];
 }
