@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { StorageMap } from '@ngx-pwa/local-storage';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 
 export interface player {
@@ -29,25 +29,30 @@ export interface currentGame {
 export class GameService {
 
   constructor(
-    private storage: StorageMap 
+    private storageSvc:  Storage
   ) { 
+    this.init();
   }
 
   gameResults: gameResult[] = [];
 
-  loadGameResults = async () => {
-    const data = await this.storage.get("gameResults").toPromise();
+  store: Storage | undefined = undefined;
+
+  init = async () => {
+
+    this.store = await this.storageSvc.create();
+    const data = await this.store.get("gameResults");
     console.log(data)
-    this.gameResults = data as gameResult[];
+    this.gameResults = data as gameResult[] ?? [];
   };
 
-  addGameResult = (r: gameResult) => {
+  addGameResult = async (r: gameResult) => {
     this.gameResults = [
       ...this.gameResults
       , r
     ];
 
-    this.storage.set("gameResults", this.gameResults).subscribe();
+    await this.store?.set("gameResults", this.gameResults);
   };
 
   getUniquePlayers = () => (
