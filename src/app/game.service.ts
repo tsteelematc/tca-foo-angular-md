@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { StorageMap } from '@ngx-pwa/local-storage';
 
 
 export interface player {
@@ -22,37 +23,24 @@ export interface currentGame {
   players: string[];
 }
 
-const game1: gameResult = {
-  start: "2022-02-14T18:55:00"
-  , end: "2022-02-14T19:00:00"
-  , winner: "Me"
-  , players: [{ name: "Me", order: 1 }, { name: "Jack", order: 2 }, { name: "Taylor", order: 3 }]
-};
-
-const game2: gameResult = {
-  start: "2022-02-14T19:05:00"
-  , end: "2022-02-14T19:35:00"
-  , winner: "Stephanie"
-  , players: [{ name: "Me", order: 1 }, { name: "Stephanie", order: 2 }]
-};
-
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  constructor() { }
+  constructor(
+    private storage: StorageMap
+  ) { }
 
-  gameResults: gameResult[] = [
-    game1
-    , game2
-  ];
+  gameResults: gameResult[] = [];
 
   addGameResult = (r: gameResult) => {
     this.gameResults = [
       ...this.gameResults
       , r
     ];
+
+    this.storage.set('gameResults', this.gameResults).subscribe();
   };
 
   getUniquePlayers = () => (
@@ -90,6 +78,11 @@ export class GameService {
     }).sort(
       (a, b) => a.winningPercentage > b.winningPercentage ? -1 : 1
     );
+  };
+
+  loadGameResults = async () => {
+    const data = await this.storage.get("gameResults").toPromise();
+    this.gameResults = data as any[] ?? [];
   };
 
 }

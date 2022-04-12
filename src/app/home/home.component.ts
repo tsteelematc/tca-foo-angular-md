@@ -10,7 +10,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private gameSvc: GameService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
+    await this.gameSvc.loadGameResults();
+
+    
     this.gamesPlayed = this.gameSvc.gameResults.length;
     this.shortestGameDuration = this.gameSvc.calculateShortestGame() / 1000 / 60;
     this.leaderboardData = this.gameSvc.calculateLeaderBoard();
