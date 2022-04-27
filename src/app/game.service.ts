@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { saveGameToCloud, loadGamesFromCloud } from './TcaCloudApi';
 
 
 export interface player {
@@ -34,13 +35,19 @@ export class GameService {
 
   gameResults: gameResult[] = [];
 
-  addGameResult = (r: gameResult) => {
+  addGameResult = async (r: gameResult) => {
     this.gameResults = [
       ...this.gameResults
       , r
     ];
 
-    this.storage.set('gameResults', this.gameResults).subscribe();
+    // this.storage.set('gameResults', this.gameResults).subscribe();
+    await saveGameToCloud(
+      "tsteele@madisoncollege.edu"
+      , "tca-foo-angular-md"
+      , r.end
+      , r
+    );
   };
 
   getUniquePlayers = () => (
