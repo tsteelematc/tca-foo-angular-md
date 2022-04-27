@@ -28,4 +28,10 @@ export class HomeComponent implements OnInit {
   leaderboardData: any[] = [];
   leaderboardColumns = ["wins", "losses", "winningPercentage", "name"];
 
+  emailAddressForEditing = "";
+
+  saveEmailAddress = () => {
+    this.gameSvc.saveEmailAddress(this.emailAddressForEditing);
+  };
+
 }

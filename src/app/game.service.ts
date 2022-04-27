@@ -41,7 +41,6 @@ export class GameService {
       , r
     ];
 
-    // this.storage.set('gameResults', this.gameResults).subscribe();
     await saveGameToCloud(
       "tsteele@madisoncollege.edu"
       , "tca-foo-angular-md"
@@ -98,4 +97,7 @@ export class GameService {
 
   emailAddress = "";
   
+  saveEmailAddress = (newEmailAddress: string) => {
+    this.storage.set('emailAddress', newEmailAddress).subscribe();
+  };
 }
