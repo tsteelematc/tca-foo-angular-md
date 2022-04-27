@@ -88,7 +88,11 @@ export class GameService {
   };
 
   loadGameResults = async () => {
-    const data = await this.storage.get("gameResults").toPromise();
+    // const data = await this.storage.get("gameResults").toPromise();
+    const data = await loadGamesFromCloud(
+      "tsteele@madisoncollege.edu"
+      , "tca-foo-angular-md"
+    );
     this.gameResults = data as any[] ?? [];
   };
 
