@@ -96,4 +96,6 @@ export class GameService {
     this.gameResults = data as any[] ?? [];
   };
 
+  emailAddress = "";
+  
 }
