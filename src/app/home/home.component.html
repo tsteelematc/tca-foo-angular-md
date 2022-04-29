@@ -6,6 +6,12 @@
 >
     <h4>
         {{ gameSvc.emailAddress }}
+        <button
+            mat-raised-button
+            (click)="resetEmailAddress()"
+        >
+            Reset
+        </button>  
     </h4>
     <h4>
         Total Games Played: {{ gamesPlayed }}

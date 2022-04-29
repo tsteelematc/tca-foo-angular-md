@@ -10,15 +10,8 @@ export class HomeComponent implements OnInit {
 
   constructor(public gameSvc: GameService) { }
 
-  async ngOnInit() {
-
-    await this.gameSvc.loadGameResults();
-
-    
-    this.gamesPlayed = this.gameSvc.gameResults.length;
-    this.shortestGameDuration = this.gameSvc.calculateShortestGame() / 1000 / 60;
-    this.leaderboardData = this.gameSvc.calculateLeaderBoard();
-    console.log(this.leaderboardData);
+  ngOnInit() {
+    this.loadGames();
   }
 
 
@@ -32,6 +25,24 @@ export class HomeComponent implements OnInit {
 
   saveEmailAddress = () => {
     this.gameSvc.saveEmailAddress(this.emailAddressForEditing);
+    this.loadGames();
+  };
+
+  resetEmailAddress = () => {
+    this.gameSvc.saveEmailAddress("");
+    this.loadGames();
+  };
+
+  loadGames = async () => {
+    await this.gameSvc.loadEmailAddress();
+    await this.gameSvc.loadGameResults();
+
+    
+    this.gamesPlayed = this.gameSvc.gameResults.length;
+    this.shortestGameDuration = this.gameSvc.calculateShortestGame() / 1000 / 60;
+    this.leaderboardData = this.gameSvc.calculateLeaderBoard();
+    console.log(this.leaderboardData);
+
   };
 
 }
