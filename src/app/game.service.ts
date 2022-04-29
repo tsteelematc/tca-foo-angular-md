@@ -42,7 +42,7 @@ export class GameService {
     ];
 
     await saveGameToCloud(
-      "tsteele@madisoncollege.edu"
+      this.emailAddress
       , "tca-foo-angular-md"
       , r.end
       , r
@@ -87,9 +87,8 @@ export class GameService {
   };
 
   loadGameResults = async () => {
-    // const data = await this.storage.get("gameResults").toPromise();
     const data = await loadGamesFromCloud(
-      "tsteele@madisoncollege.edu"
+      this.emailAddress
       , "tca-foo-angular-md"
     );
     this.gameResults = data as any[] ?? [];
@@ -99,5 +98,9 @@ export class GameService {
   
   saveEmailAddress = (newEmailAddress: string) => {
     this.storage.set('emailAddress', newEmailAddress).subscribe();
+  };
+
+  loadEmailAddresss = async () => {
+    this.emailAddress = await this.storage.get("emailAddress").toPromise() as string ?? "";
   };
 }
