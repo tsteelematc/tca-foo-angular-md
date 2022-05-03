@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { PlayGameComponent } from './play-game/play-game.component';
 import { SetupGameComponent } from './setup-game/setup-game.component';
 
+
 const routes: Routes = [
   { path: "", component: HomeComponent}
   , { path: "setup", component: SetupGameComponent}
